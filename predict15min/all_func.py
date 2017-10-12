@@ -171,7 +171,7 @@ def loopMatch(downData,upData,dayNum,maxtime1=900,mintime1=40,down_direction1=3)
 #参数5为上游交叉口驶入方向2，参数6为上游交叉口驶入方向2的驶入车道
 #参数7为下游驶出方向1，参数8为下游交叉口的驶出方向1的驶出车道,参数9为下游交叉口的驶出方向1的驶出车道匹配统计的车道
 #返回数组是第1列是时间，第2列为驶入量，第3列为驶出量，第4列为匹配车道的过车流量
-def inOut(upInsec,downInsec,upDire1,upClane1,upDire2,upClane2,downDire,downClane1,downClane2):
+def inOut(upInsec,downInsec,upDire1,upClane1,upDire2,upClane2,downDire,downClane1):
     upInsec.iloc[:,1]=pd.to_datetime(upInsec.iloc[:,1])
     downInsec.iloc[:,1]=pd.to_datetime(downInsec.iloc[:,1])
     upInsec['day']=upInsec.iloc[:,1].apply(lambda x:100*x.month+x.day)
@@ -226,7 +226,7 @@ def inOut(upInsec,downInsec,upDire1,upClane1,upDire2,upClane2,downDire,downClane
             med_data[j,2]=len(out_q1Final[(out_q1Final.iloc[:,-2]>j*15*60)&(out_q1Final.iloc[:,-2]<(j+1)*15*60)])
             med=out_q1Final[(out_q1Final.iloc[:,-2]>j*15*60)&(out_q1Final.iloc[:,-2]<(j+1)*15*60)]
             med_final1=[]
-            for y in downClane2:
+            for y in downClane1:
                 cach=med[(med.iloc[:,2]==y)]
                 med_final1.append(cach)
             medFinal=pd.concat(med_final1, ignore_index=True)
