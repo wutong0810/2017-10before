@@ -709,16 +709,16 @@ def removeFun(data):
     data1=np.array(data)
     dataFinal=[]
     for i in data.iloc[:,2].unique():
-            data2=data1[data1[:,2]==i]
-            indice=[]
-            for j in range(1,len(data2)):
-                if (cmp(data2[j,0],data2[j-1,0])==0)& (data2[j,6]-data2[j-1,6]<100&len(data2[j,0])>5):
-                    indice.append(j-1)
-        #给行程时间付上-1来标示行程时间
-            for h in indice:
-                data2[h,7]=-1
-            dataFinal.append(pd.DataFrame(data2[data2[:,7]>-1]))
-            dataFinal1=pd.concat(dataFinal, ignore_index=True) 
+        data2=data1[data1[:,2]==i]
+        indice=[]
+        for j in range(1,len(data2)):
+            if (cmp(data2[j,0],data2[j-1,0])==0)& (data2[j,6]-data2[j-1,6]<100&len(data2[j,0])>5):
+                indice.append(j-1)
+    #给行程时间付上-1来标示行程时间
+        for h in indice:
+            data2[h,7]=-1
+        dataFinal.append(pd.DataFrame(data2[data2[:,7]>-1]))
+        dataFinal1=pd.concat(dataFinal, ignore_index=True)
     return dataFinal1
 
 
